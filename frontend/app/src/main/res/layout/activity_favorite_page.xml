@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FavoritePage">
+
+
+    <ImageView
+        android:id="@+id/mainpageLogoImage2"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mypal_logo_3" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavMenu"
+        android:layout_width="410dp"
+        android:layout_height="75dp"
+        android:background="#FFFFFF"
+        app:itemIconSize="24dp"
+        app:itemIconTint="#BAB9D0"
+        app:itemPaddingBottom="0dp"
+        app:itemPaddingTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/nav_menu" />
+
+
+    <ScrollView
+        android:id="@+id/homeScrollAll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="800dp"
+                android:background="@drawable/homescreen_2">
+
+                <TextView
+                    android:id="@+id/activityPageName"
+                    android:layout_width="232dp"
+                    android:layout_height="73dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:text="Activities"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.179"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.204" />
+
+                <ImageButton
+
+                    android:id="@+id/notificationsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/ripple"
+                    android:backgroundTint="#000A63"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.955"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_alert"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/savedActivities"
+                    android:layout_width="88dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Saved"
+                    android:textColor="#4F4F4F"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.105"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.347" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScoll12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginEnd="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.52"
+                    tools:ignore="SpeakableTextPresentCheck">
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <FrameLayout
+                            android:id="@+id/frameLayout1"
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/activityImage1"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInFrame1"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activity1TextView"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityDate1P"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start|left"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ActivityImage2"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInFrame2"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activityTextView2P"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityDate2P"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start|left"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/activityImage3"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInFrame3"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activityButton3"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityDate3P"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start|left"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+                <TextView
+                    android:id="@+id/aroundYouText"
+                    android:layout_width="88dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Your\nActivities"
+                    android:textColor="#4F4F4F"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.099"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.697" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.96">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <FrameLayout
+                            android:id="@+id/FrameLayout"
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/activityAroundImage1"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+
+
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInAroundFrame1"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activityAroundText1"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityAroundDate1"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start|left"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/activityAroundImage2"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInAroundFrame2"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activityAroundText2"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityAroundDate2"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start|left"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="220dp"
+                            android:layout_height="196dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/bottomNavMenu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.225"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.54">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/activityAroundImage3"
+                                android:layout_width="205dp"
+                                android:layout_height="142dp"
+                                android:layout_gravity="center|start|top"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/roundedImageView"
+                                app:srcCompat="@drawable/laulib" />
+
+                            <LinearLayout
+                                android:id="@+id/linearInAroundFrame3"
+                                android:layout_width="match_parent"
+                                android:layout_height="51dp"
+                                android:layout_gravity="bottom|end"
+                                android:background="#F9F9F9"
+                                android:backgroundTint="#F9F9F9"
+                                android:elevation="0sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/activityAroundText3"
+                                    android:layout_width="154dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Road Trip"
+                                    android:textAllCaps="false"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/activityAroundDate3"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|clip_horizontal|start"
+                                    android:background="#F9F9F9"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Thursday, May 5, 2022"
+                                    android:textColor="#606065"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginBottom="282dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.886"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.07999998"
+                    app:srcCompat="@drawable/notification_indicator" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:hapticFeedbackEnabled="false"
+                    android:onClick="OnClickCreateNewActivity"
+                    app:backgroundTint="#000A63"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.977"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.708"
+                    app:srcCompat="@drawable/plus_sign"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

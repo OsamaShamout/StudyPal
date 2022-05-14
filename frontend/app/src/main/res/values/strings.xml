@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">MyPal</string>
+    <string name="welcome_text">Welcome to your new <font color='#7DD5DB'>StudyPal.</font></string>
+    <string name="button_get_started">Get Started!</string>
+    <string name="join_text">Start the learning.</string>
+    <string name="community_imagedesc">Community Image</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="alternative_log_in_reg">or <font color='#7DD5DB'>Register a new account here</font></string>
+    <string name="alternative_sign_up">or <font color='#7DD5DB'>Log in here</font></string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="homepage_greetings">Good morning,USERNAME </string>
+    <string name="homepage_greetings2">Good morning,\nOsama! </string>
+
+    <string name="activity_created">Share activity with people!</string>
+
+    <string name="copy_text">Copy URL</string>
+    <string name="done_copy">Done</string>
+
+
+    //countries array
+    <string-array name="countries_available">
+        <item>Choose Country</item>
+        <item>Jordan</item>
+        <item>Lebanon</item>
+        <item>Syria</item>
+        <item>Palestine</item>
+        <item>Iraq</item>
+        <item>Egypt</item>
+        <item>Libya</item>
+        <item>Tunisia</item>
+        <item>Morrocco</item>
+        <item>UAE</item>
+        <item>Qatar</item>
+    </string-array>
+
+
+    <string-array name="activity_tags">
+        <item>Choose Type</item>
+        <item>Material</item>
+        <item>Exam</item>
+    </string-array>
+
+    <string-array name="list_sections">
+        <item>Choose Section</item>
+        <item>Section 11</item>
+        <item>Section 12</item>
+    </string-array>
+
+</resources>
