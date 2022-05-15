@@ -15,9 +15,6 @@
             android:name=".ProfileModify"
             android:exported="false" />
         <activity
-            android:name=".homepage_trial"
-            android:exported="false" />
-        <activity
             android:name=".FavoritePage"
             android:exported="false" />
         <activity

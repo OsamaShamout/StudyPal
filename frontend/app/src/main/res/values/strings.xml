@@ -44,16 +44,31 @@
     </string-array>
 
 
-    <string-array name="activity_tags">
+    <string-array name="list_types">
         <item>Choose Type</item>
         <item>Material</item>
         <item>Exam</item>
     </string-array>
 
     <string-array name="list_sections">
-        <item>Choose Section</item>
+        <item>Choose Section(s)</item>
         <item>Section 11</item>
         <item>Section 12</item>
     </string-array>
+
+
+    <string-array name="list_materials">
+        <item>Choose Material(s)</item>
+        <item>Chapter 1</item>
+        <item>Chapter 2</item>
+    </string-array>
+
+    <string-array name="list_of_roles">
+        <item>Choose a role number</item>
+        <item>Administrator 0</item>
+        <item>Instructor 1</item>
+        <item>Student 2</item>
+    </string-array>
+
 
 </resources>

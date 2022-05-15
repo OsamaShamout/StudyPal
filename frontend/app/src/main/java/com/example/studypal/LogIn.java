@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class LogIn extends AppCompatActivity {
+public class LogIn extends AppCompatActivity implements ValidateInformation {
 
     boolean logged_in = false;
 
@@ -45,6 +45,20 @@ public class LogIn extends AppCompatActivity {
     int user_id;
 
 
+    @Override
+    public boolean validateEmail(String email) {
+
+        //Ensure a valid email is input.
+        Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
+        Matcher m1 = p1.matcher(email_string);
+
+        if (m1.matches()) {
+            email_string = m1.group(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,26 +84,19 @@ public class LogIn extends AppCompatActivity {
 
     String verification;
     public void OnClickLogIn(View view){
-
         email_string = input_email.getText().toString();
-        password_string = input_password.getText().toString();
 
-        //Ensure a valid email is input.
-        Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
-        Matcher m1 = p1.matcher(email_string);
-
-        if (m1.matches()) {
-            email_string = m1.group(1);
-        } else {
+        //If check e-mail and toast if invalid
+        if (!validateEmail(email_string)){
             Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             dialogue.setText("Please enter a valid email address.");
-            return;
         }
+
+        password_string = input_password.getText().toString();
 
         //Check if e-mail exists in database.
         //Check if passwords match.
-        String url1 = "https://mcprojs.000webhostapp.com/backend/log_in.php";
-
+        String url1 = "https://mcprojs.000webhostapp.com/backend_se/log_in.php";
 
         //Perform to check conditions
         //Upon success page intent to HomePage (from method).
@@ -105,9 +112,10 @@ public class LogIn extends AppCompatActivity {
     //Send data to Log In.
     String email_string;
     String password_string;
+
+    
     public class SendLogInToDB extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
-
 
 
             //Variables to initiate connection.
@@ -235,7 +243,6 @@ public class LogIn extends AppCompatActivity {
                     }
 
                 }
-
             }
             catch (Exception e){
                 e.printStackTrace();

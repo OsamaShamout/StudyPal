@@ -6,11 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".CreateActivity">
 
+    <Spinner
+        android:id="@+id/listofSections2"
+        android:layout_width="271dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginBottom="23dp"
+        android:contentDescription="List of sections provided"
+        android:textSize="12sp"
+        android:theme="@style/mySpinnerItemStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.726"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/locationActivityTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="363dp"
+        android:text="Material(s):"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <Spinner
+        android:id="@+id/listofSections"
+        android:layout_width="271dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginBottom="23dp"
+        android:contentDescription="List of sections provided"
+        android:textSize="12sp"
+        android:theme="@style/mySpinnerItemStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.716"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/locationActivityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="363dp"
+        android:text="Section(s):"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.436" />
+
     <Button
         android:id="@+id/createTask"
         android:layout_width="306dp"
         android:layout_height="54dp"
-        android:layout_marginBottom="172dp"
         android:background="@drawable/ripple"
         android:contentDescription="Create Task"
         android:fontFamily="@font/roboto_bold"
@@ -24,10 +87,10 @@
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextActivityDate"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <Spinner
         android:id="@+id/listofTaskTypes"
@@ -43,7 +106,7 @@
         app:layout_constraintHorizontal_bias="0.716"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46"
+        app:layout_constraintVertical_bias="0.398"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
@@ -59,7 +122,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.37" />
 
     <ImageButton
         android:id="@+id/backButton2"
@@ -131,21 +194,6 @@
         app:layout_constraintVertical_bias="0.19" />
 
     <TextView
-        android:id="@+id/locationActivityTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="363dp"
-        android:text="Section(s):"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -182,10 +230,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintVertical_bias="0.62" />
 
     <TextView
         android:id="@+id/locationActivityDate"
@@ -200,7 +248,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.618" />
 
     <EditText
         android:id="@+id/editTextActivitytDescrip"
@@ -221,22 +269,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.279"
         tools:ignore="TextContrastCheck" />
-
-    <Spinner
-        android:id="@+id/listofSections"
-        android:layout_width="271dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="23dp"
-        android:contentDescription="List of sections provided"
-        android:textSize="12sp"
-        android:theme="@style/mySpinnerItemStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392"
-        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

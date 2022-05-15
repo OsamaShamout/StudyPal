@@ -111,7 +111,7 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
 
         bottomNavigationView.setOnItemSelectedListener(this);
 
-        String url = "https://mcprojs.000webhostapp.com/backend/fetch_home.php";
+        String url = "https://mcprojs.000webhostapp.com/backend_se/fetch_home.php";
         GetActivitiesfromDB task = new GetActivitiesfromDB();
         task.execute(url);
 

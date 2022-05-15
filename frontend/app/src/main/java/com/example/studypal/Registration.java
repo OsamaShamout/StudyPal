@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -33,7 +36,7 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText first_name;
     EditText last_name;
@@ -43,6 +46,8 @@ public class Registration extends AppCompatActivity {
     EditText country;
 
     Button register;
+
+    Spinner spinner_roles;
 
     Boolean logged_in = false;
 
@@ -55,10 +60,56 @@ public class Registration extends AppCompatActivity {
         email = (EditText) findViewById(R.id.editTextEmailAddress);
         password = (EditText) findViewById(R.id.editTextTextPassword);
         repeat_password = (EditText) findViewById(R.id.repeatPasswordEditText);
-        country = (EditText) findViewById(R.id.locationEditText);
 
         register = (Button) findViewById(R.id.registrationButton);
 
+        //Define the spinner of roles
+        spinner_roles = findViewById(R.id.listOfRoles);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.list_of_roles, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_roles.setAdapter(adapter);
+        spinner_roles.setOnItemSelectedListener(this);
+
+    }
+
+
+    public void createDialog(){
+        AlertDialog password_alert = new AlertDialog.Builder(Registration.this).create();
+        password_alert.setTitle("Password has to have:");
+        password_alert.setMessage("1. Minimum eight characters\n2. At least one uppercase letter\n3. One lowercase lette\n4. One number\n5. One special character\n6. Maximum 30 characters");
+        password_alert.setButton(AlertDialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        password_alert.show();
+    }
+
+
+    String role;
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        role = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    int role_number = -1;
+    public int getRoleNumber(String role){
+        String[] splitted = role.split(" ");
+        int num = -1;
+        try{
+            num = Integer.parseInt(splitted[1]);
+            return num;
+        }
+        catch (Exception e){
+            return num;
+        }
     }
 
     public void OnClickReturnToLogIn(View view) {
@@ -66,101 +117,145 @@ public class Registration extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    //Check First Name Method
+    public boolean checkFirstName(String first_name) {
+        if (first_name.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    //Check Last Name Method
+    public boolean checkLastName(String last_name) {
+        if (last_name.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    //Check if email entered and if it matches expression
+    public boolean checkEmail(String email) {
+
+        //Ensure a valid email is input.
+        Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
+        Matcher m1 = p1.matcher(email);
+
+        if (m1.matches()) {
+            email_string = m1.group(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkPassword(String pass) {
+
+        //Ensure a valid password is input.
+        Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
+        Matcher m1 = p1.matcher(pass);
+
+        if (m1.matches()) {
+            password_string = m1.group(1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkRepeatPassword(String pass) {
+
+        if (pass.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    //Ensure repeated password is the same as previous password.
+    public boolean checkMatchingPassword(String p, String rp) {
+        if (p.equals(rp)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkRoleNumber(String r) {
+        if(!(getRoleNumber(role) >= 0)){
+            return false;
+        }else{
+            role_number = getRoleNumber(role);
+            return true;
+        }
+    }
+
+    //Validate information
+    public boolean validateInformation(){
+        //Handle First Name Not Entered
+        if (!checkFirstName(first_name_string)) {
+            Toast.makeText(getApplicationContext(), "Please enter a first name.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        //Handle Last Name Not Entered
+        if (!checkLastName(last_name_string)) {
+            Toast.makeText(getApplicationContext(), "Please enter a last name.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        if (!checkEmail(email_string)) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!checkPassword(password_string)) {
+            Toast.makeText(getApplicationContext(), "Please enter a valid password.", Toast.LENGTH_SHORT).show();
+            createDialog();
+            return false;
+        }
+
+        //Check if repeat password is input.
+        if(!checkRepeatPassword(repeat_password_string)){
+            Toast.makeText(getApplicationContext(), "Please enter repeat password.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        if(!checkMatchingPassword(password_string, repeat_password_string)){
+            Toast.makeText(getApplicationContext(), "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!checkRoleNumber(role)){
+            Toast.makeText(getApplicationContext(), "Please assign a valid role.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        //Inforamtion Valid
+        return true;
+    }
+
     String first_name_string;
     String last_name_string;
     String email_string;
     String password_string;
     String repeat_password_string;
-    String country_string;
 
     public void OnClickRegister(View view) {
         //Gather registration information
         first_name_string = first_name.getText().toString();
         last_name_string = last_name.getText().toString();
-
-        if(first_name_string.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter a first name.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(last_name_string.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter a last name.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-
-        //Validate information
         email_string = email.getText().toString();
-        //Ensure a valid email is input.
-        Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
-        Matcher m1 = p1.matcher(email_string);
-
-        if (m1.matches()) {
-            email_string = m1.group(1);
-        } else {
-            Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Validate Password
         password_string = password.getText().toString();
         repeat_password_string = repeat_password.getText().toString();
 
-        //Check if password input.
-        if(password_string.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter a password.", Toast.LENGTH_SHORT).show();
-            return;
+
+        if (validateInformation()){
+            SendSignUptoDB sign_up = new SendSignUptoDB();
+            String url2 = "https://mcprojs.000webhostapp.com/backend_se/sign_up.php";
+            sign_up.execute(url2);
         }
-        //Check if repeat password is input.
-        if(repeat_password_string.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter repeat password.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Ensure repeated password is the same as previous password.
-        if (!password_string.equals(repeat_password_string)) {
-            Toast.makeText(getApplicationContext(), "Passwords do not match.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Application focused on MENA region countries but I will not check for that at log in
-        //to attract as many users from all around the world then determine the task moving forward.
-
-        //Check Country
-        country_string = country.getText().toString();
-        if(country_string.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter a country.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Ensure a valid password is input.
-        Pattern p2 = Pattern.compile("((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d$@$_.!%*?&]{8,30})");
-        Matcher m2 = p2.matcher(password_string);
-
-        if (m2.matches()) {
-            password_string = m2.group(1);
-        } else {
-          ;
-            AlertDialog password_alert = new AlertDialog.Builder(Registration.this).create();
-            password_alert.setTitle("Password has to have:");
-            password_alert.setMessage("1. Minimum eight characters\n2. At least one uppercase letter\n3. One lowercase lette\n4. One number\n5. One special character\n6. Maximum 30 characters");
-            password_alert.setButton(AlertDialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-
-            password_alert.show();
-
-            return;
-        }
-
-
-        SendSignUptoDB sign_up = new SendSignUptoDB();
-        String url2 = "https://mcprojs.000webhostapp.com/backend/sign_up.php";
-        sign_up.execute(url2);
 
     }
 
@@ -172,8 +267,6 @@ public class Registration extends AppCompatActivity {
     //Register User API
     public class SendSignUptoDB extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
-
-
 
             //Variables to initiate connection.
             URL url;
@@ -202,7 +295,7 @@ public class Registration extends AppCompatActivity {
                 jo.put("last_name", last_name_string);
                 jo.put("email", email_string);
                 jo.put("password", password_string);
-                jo.put("country", country_string);
+                jo.put("role_number", role_number);
 
                 //Pack data to be processed by PHP for $_POST.
                 boolean firstValue = true;
