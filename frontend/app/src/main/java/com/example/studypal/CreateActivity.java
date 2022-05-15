@@ -43,19 +43,15 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
     Spinner spinner_list_types;
     Spinner spinner_list_sections;
     Spinner spinner_list_materials;
+
     EditText activity_name;
     EditText activity_description;
-    EditText activity_date;
-    TextView activity_capacity;
 
-
-    //Increase-Decrease Activity Capacity variables
-    private int capacity;
-    ImageButton increase_capacity;
-    ImageButton decrease_capacity;
+    EditText time_study;
 
     String user_id;
 
+    float study_hours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,31 +60,32 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
 
         activity_name = (EditText) findViewById(R.id.editTextActivityName);
         activity_description = (EditText) findViewById(R.id.editTextActivitytDescrip);
-        spinner_list_types = (Spinner) findViewById(R.id.listofTaskTypes);
-        spinner_list_sections = (Spinner) findViewById(R.id.listofSections);
-        spinner_list_materials = (Spinner) findViewById(R.id.listofMaterials);
 
-
-        increase_capacity = (ImageButton) findViewById(R.id.increaseCapacityButton);
-        decrease_capacity = (ImageButton) findViewById(R.id.decreaseMemberButton);
-
-        capacity = 1;
-
-
-
-        //Define the spinner of tags
-        spinner_list_countries= findViewById(R.id.listofLocationsCreate);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.countries_available, android.R.layout.simple_spinner_item);
+        //Define the spinner of types
+        spinner_list_types= (Spinner) findViewById(R.id.listofTaskTypes);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.list_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_list_countries.setAdapter(adapter);
-        spinner_list_countries.setOnItemSelectedListener(this);
+        spinner_list_types.setAdapter(adapter);
+        spinner_list_types.setOnItemSelectedListener(this);
+        spinner_list_types.setPrompt("Set Task Type:");
 
-        //Define the spinner of tags
-        spinner_list_tags= findViewById(R.id.listOfTags);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.activity_tags, android.R.layout.simple_spinner_item);
+        //Define the spinner of sections
+        spinner_list_sections= (Spinner) findViewById(R.id.listofSections);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.list_sections, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_list_tags.setAdapter(adapter2);
-        spinner_list_tags.setOnItemSelectedListener(this);
+        spinner_list_sections.setAdapter(adapter2);
+        spinner_list_sections.setOnItemSelectedListener(this);
+        spinner_list_sections.setPrompt("Set Task Section:");
+
+        //Define the spinner of sections
+        spinner_list_materials= (Spinner) findViewById(R.id.listofSections);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.list_materials, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_list_materials.setAdapter(adapter2);
+        spinner_list_materials.setOnItemSelectedListener(this);
+        spinner_list_materials.setPrompt("Set Material(s):");
+
+        time_study = (EditText) findViewById(R.id.timeStudyEditText);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         user_id = preferences.getString("user_id", "");
@@ -110,32 +107,16 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
         startActivity(intent);
     }
 
-    public void increaseCapacity(View view) {
-        if(capacity == 30){
-            Toast.makeText(getApplicationContext(),"Woah that many people!\nTry to decrease your list.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else{
-            capacity++;
-            activity_capacity.setText("\t\t" + capacity);
-        }
+   public boolean verifyStudyHours(String hours){
+       study_hours = Integer.parseInt(time_study.getText().toString());
 
-    }
+       if (!(study_hours >=0)){
+           return false;
+       }
+       return true;
+   }
 
-    public void decreaseCapacity(View view) {
-        //Ensure no more capacity below 0.
-        if(capacity == 1){
-            Toast.makeText(getApplicationContext(),"Cannot make activity with less than 1 member :(", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(),"Think of more friends to come!", Toast.LENGTH_SHORT).show();
 
-            return;
-        }
-        else{
-            capacity--;
-            activity_capacity.setText("\t\t" + capacity);
-        }
-
-    }
     Boolean logged_in;
     String activity_name_string;
     String activity_description_string;
@@ -143,14 +124,13 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
     String activity_location_string;
     String activity_tag_string;
     String activity_capacity_string;
-    @SuppressLint("LongLogTag")
+
+
     public void onClickCreateTask(View view){
 
         //Obtain all information to register activity
         activity_name_string = activity_name.getText().toString();
         activity_description_string = activity_description.getText().toString();
-        activity_date_string = activity_date.getText().toString();
-        activity_tag_string = activity_capacity.getText().toString();
 
         //                              Validate Data Is Correct
         //                              -------------------------
@@ -180,21 +160,19 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
             return;
         }
 
-        Log.e("Activity description is: " , activity_description_string);
+        Log.e("description is: " , activity_description_string);
 
         //Ensure an activity location is correctly given.
         //Obtain Activity Location
-        AdapterView<?> parent = spinner_list_countries;
-        int number = spinner_list_countries.getSelectedItemPosition();
-        activity_location_string = spinner_list_countries.getItemAtPosition(number).toString();
+        AdapterView<?> parent = spinner_list_types;
+        int number = spinner_list_types.getSelectedItemPosition();
+        activity_location_string = spinner_list_types.getItemAtPosition(number).toString();
 
         //Ensure a valid country is chosen.
         if(activity_location_string.equalsIgnoreCase("Choose Country")){
             Toast.makeText(getApplicationContext(), "Please choose a country.", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
 
         Log.e("Activity country is: " , activity_location_string);
 

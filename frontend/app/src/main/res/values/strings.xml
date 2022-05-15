@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPal</string>
+    <string name="app_name">StudyPal</string>
     <string name="welcome_text">Welcome to your new <font color='#7DD5DB'>StudyPal.</font></string>
     <string name="button_get_started">Get Started!</string>
     <string name="join_text">Start the learning.</string>
@@ -26,45 +26,23 @@
     <string name="copy_text">Copy URL</string>
     <string name="done_copy">Done</string>
 
-
-    //countries array
-    <string-array name="countries_available">
-        <item>Choose Country</item>
-        <item>Jordan</item>
-        <item>Lebanon</item>
-        <item>Syria</item>
-        <item>Palestine</item>
-        <item>Iraq</item>
-        <item>Egypt</item>
-        <item>Libya</item>
-        <item>Tunisia</item>
-        <item>Morrocco</item>
-        <item>UAE</item>
-        <item>Qatar</item>
-    </string-array>
-
-
     <string-array name="list_types">
-        <item>Choose Type</item>
         <item>Material</item>
         <item>Exam</item>
     </string-array>
 
     <string-array name="list_sections">
-        <item>Choose Section(s)</item>
         <item>Section 11</item>
         <item>Section 12</item>
     </string-array>
 
 
     <string-array name="list_materials">
-        <item>Choose Material(s)</item>
         <item>Chapter 1</item>
         <item>Chapter 2</item>
     </string-array>
 
     <string-array name="list_of_roles">
-        <item>Choose a role number</item>
         <item>Administrator 0</item>
         <item>Instructor 1</item>
         <item>Student 2</item>
