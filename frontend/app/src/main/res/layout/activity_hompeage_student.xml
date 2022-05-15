@@ -16,10 +16,14 @@
         android:minHeight="48dp"
         android:onClick="logOut"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/log_out_white"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/greetingsMessage"
@@ -47,21 +51,25 @@
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@android:drawable/stat_notify_chat"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <HorizontalScrollView
+    <ScrollView
         android:id="@+id/horizontalScoll1"
-        android:layout_width="371dp"
+        android:layout_width="300dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.279"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47000003"
+        app:layout_constraintVertical_bias="0.479"
         tools:ignore="SpeakableTextPresentCheck">
 
 
@@ -72,7 +80,7 @@
             android:id="@+id/linearMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -175,7 +183,7 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavMenu"
@@ -195,19 +203,6 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:hapticFeedbackEnabled="false"
-        android:onClick="OnClickCreateNewActivity"
-        app:backgroundTint="#7DD5DB"
-        app:srcCompat="@drawable/plus_sign"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="338dp"
-        tools:layout_editor_absoluteY="496dp" />
-
     <TextView
         android:id="@+id/assignedTasks"
         android:layout_width="88dp"
@@ -215,8 +210,12 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="Assigned Tasks:"
         android:textColor="#4F4F4F"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="263dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.382" />
 
     <Button
         android:id="@+id/viwStudentActivityButton"
@@ -225,18 +224,18 @@
         android:text="View Section Activity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.746" />
 
     <Button
         android:id="@+id/viewStudentActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Student Activity"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="474dp" />
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="574dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

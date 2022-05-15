@@ -113,7 +113,7 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
     String email_string;
     String password_string;
 
-    
+
     public class SendLogInToDB extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
 
@@ -228,12 +228,12 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("user_id",split_values[1]);
                         editor.putString("name",split_values[2]);
-                        editor.putString("country",split_values[3]);
+                        editor.putString("role_num",split_values[3]);
                         editor.apply();
 
                         Log.e("Split user_id", split_values[1]);
                         Log.e("Split name", split_values[2]);
-                        Log.e("Split country", split_values[3]);
+                        Log.e("Split role", split_values[3]);
 
                         //Validate Information from DB
                         if(logged_in) {

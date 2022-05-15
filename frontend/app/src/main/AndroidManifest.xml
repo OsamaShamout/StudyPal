@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".hompeage_student"
+            android:exported="false" />
+        <activity
             android:name=".ProfileModify"
             android:exported="false" />
         <activity
@@ -32,7 +35,6 @@
         <activity
             android:name=".Registration"
             android:exported="false" />
-
         <activity
             android:name=".LogIn"
             android:exported="false" />

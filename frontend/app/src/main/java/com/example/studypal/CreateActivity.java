@@ -40,8 +40,9 @@ import javax.net.ssl.HttpsURLConnection;
 public class CreateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    Spinner spinner_list_tags;
-    Spinner spinner_list_countries;
+    Spinner spinner_list_types;
+    Spinner spinner_list_sections;
+    Spinner spinner_list_materials;
     EditText activity_name;
     EditText activity_description;
     EditText activity_date;
@@ -63,8 +64,10 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
 
         activity_name = (EditText) findViewById(R.id.editTextActivityName);
         activity_description = (EditText) findViewById(R.id.editTextActivitytDescrip);
-        activity_date = (EditText) findViewById(R.id.editTextActivityDate);
-        activity_capacity = (TextView) findViewById(R.id.capacityNumber);
+        spinner_list_types = (Spinner) findViewById(R.id.listofTaskTypes);
+        spinner_list_sections = (Spinner) findViewById(R.id.listofSections);
+        spinner_list_materials = (Spinner) findViewById(R.id.listofMaterials);
+
 
         increase_capacity = (ImageButton) findViewById(R.id.increaseCapacityButton);
         decrease_capacity = (ImageButton) findViewById(R.id.decreaseMemberButton);
@@ -141,7 +144,7 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
     String activity_tag_string;
     String activity_capacity_string;
     @SuppressLint("LongLogTag")
-    public void onClickRegisterActivity(View view){
+    public void onClickCreateTask(View view){
 
         //Obtain all information to register activity
         activity_name_string = activity_name.getText().toString();

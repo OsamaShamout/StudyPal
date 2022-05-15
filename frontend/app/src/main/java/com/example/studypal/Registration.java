@@ -369,7 +369,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     Log.e("Split return", split_values[0]);
                     Log.e("Split user_id", split_values[1]);
                     Log.e("Split name", split_values[2]);
-                    Log.e("Split country", split_values[3]);
+                    Log.e("Split role_number", split_values[3]);
 
                     String returned_statement = split_values[0];
                     if(returned_statement.equalsIgnoreCase("Success")) {
@@ -379,12 +379,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("user_id", split_values[1]);
                         editor.putString("name",split_values[2]);
-                        editor.putString("country",split_values[2]);
+                        editor.putString("role_number",split_values[2]);
                         editor.apply();
 
                         logged_in = true;
 
-                        editor.putBoolean("satus", logged_in);
+                        editor.putBoolean("status", logged_in);
 
                         //Validate Information from DB
                         if (logged_in) {
