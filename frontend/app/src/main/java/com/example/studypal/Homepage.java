@@ -92,6 +92,8 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
             greetings.setText("Good evening,\n" +name+"!");
         }
 
+        Log.e("Name is: ", name);
+
          txt_n1 = findViewById(R.id.activityTextView1);
          txt_n2  = findViewById(R.id.activityTextView2);
          txt_n3  = findViewById(R.id.activityTextView3);
