@@ -176,7 +176,7 @@
         app:layout_constraintVertical_bias="0.093" />
 
     <EditText
-        android:id="@+id/editTextActivityName"
+        android:id="@+id/editTextTaskName"
         android:layout_width="270dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -251,7 +251,7 @@
         app:layout_constraintVertical_bias="0.618" />
 
     <EditText
-        android:id="@+id/editTextActivitytDescrip"
+        android:id="@+id/editTextTaskDescription"
         android:layout_width="270dp"
         android:layout_height="49dp"
         android:layout_marginStart="16dp"

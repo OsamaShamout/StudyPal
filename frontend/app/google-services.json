@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1063382347191",
+    "project_id": "studypal-a0b18",
+    "storage_bucket": "studypal-a0b18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063382347191:android:813544bac87c64ce34cc32",
+        "android_client_info": {
+          "package_name": "com.example.studypal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063382347191-ho3q4j55onlk1grl1ge00a9m61s535pj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZDerak7NS_yFR8vuuiMeRO92ITeC82gQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063382347191-ho3q4j55onlk1grl1ge00a9m61s535pj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

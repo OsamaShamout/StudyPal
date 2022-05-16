@@ -58,6 +58,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     Spinner spinner_roles;
 
     Boolean logged_in = false;
+    Boolean isInstructor = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,6 +144,17 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    public boolean checkInstructorStatus(String email){
+        Pattern p1 = Pattern.compile(".+lb");
+        Matcher m1 = p1.matcher(email);
+
+        if (m1.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     public boolean checkPassword(String pass) {
 
         //Ensure a valid password is input.
@@ -228,17 +240,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         if (!checkPassword(password_string)) {
             Toast.makeText(getApplicationContext(), "Please enter a valid password.", Toast.LENGTH_SHORT).show();
-//            AlertDialog password_alert = new AlertDialog.Builder(Registration.this).create();
-//            password_alert.setTitle("Password has to have:");
-//            password_alert.setMessage("1. Minimum eight characters\n2. At least one uppercase letter\n3. One lowercase lette\n4. One number\n5. One special character\n6. Maximum 30 characters");
-//            password_alert.setButton(AlertDialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    dialogInterface.dismiss();
-//                }
-//            });
-//
-//            password_alert.show();
             return false;
         }
 
@@ -273,10 +274,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void OnClickRegister(View view) {
         //Check Information
         if (validateInformation()) {
+
             //Information is valid
-            if (role_number == 1) {
+            isInstructor = checkInstructorStatus(email_string);
+            if (isInstructor) {
                 Instructor instr = new Instructor(first_name_string, last_name_string, email_string, password_string, courses, tasks, "Arts and Sciences");
-            } else if (role_number == 0) {
+            } else if (!isInstructor) {
                 Student student = new Student(first_name_string, last_name_string, email_string, password_string);
             }
 

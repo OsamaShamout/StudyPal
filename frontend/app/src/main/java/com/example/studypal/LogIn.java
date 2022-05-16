@@ -1,28 +1,38 @@
 package com.example.studypal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LogIn extends AppCompatActivity implements ValidateInformation {
 
+public class LogIn extends AppCompatActivity implements ValidateInformation {
+    private FirebaseAuth mAuth;
     boolean logged_in = false;
 
     String[] user_ids = {"1", "2", "3","4"};
     String[] roles = {"2", "2", "1", "1"};
-    String[] emails = {"osama@lau.edu","omar@lau.edu", "azzam@lau.edu.lb", "sanaa@lau.edu.lb"};
-    String[] names = {"Osama Shamout", "Omar Mlaeb", "Azzam Mourad", "Sanaa Sharafeddine"};
-    String[] passwords = {"123123_Osama", "123123_Omar", "123123_Azzam", "123123_Sanaa"};
+    String[] emails = {"osama@lau.edu","omar@lau.edu", "bilal@lau.edu", "sameer@lau.edu"};
+    String[] names = {"Osama Shamout", "Omar Mlaeb", "Bilal Hamdanieh", "Sameer Al Jabari "};
+    String[] passwords = {"123123_Osama", "123123_Omar", "123123_Bilal", "123123_Sameer"};
     EditText input_email;
     EditText input_password;
     TextView dialogue;
@@ -31,6 +41,53 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
     int user_id;
 
+    boolean isInstructor = false;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_log_in);
+
+        input_email = (EditText) findViewById(R.id.editTextTextEmailAddressLogIn);
+        input_password = (EditText)  findViewById(R.id.editTextPasswordLogIn);
+        log_in = (Button) findViewById(R.id.loginButton);
+        dialogue = (TextView) findViewById(R.id.alertMessageTextView);
+
+        mAuth = FirebaseAuth.getInstance();
+
+    }
+
+    public void OnClickReturnToWelcome(View view){
+        Intent intent = new Intent(this,Welcome.class);
+        startActivity(intent);
+    }
+
+    public void OnClickGoToRegistration(View view){
+        Intent intent = new Intent(this,Registration.class);
+        startActivity(intent);
+    }
+
+
+
+    public boolean checkInstructorStatus(String email){
+        Pattern p1 = Pattern.compile(".+lb");
+        Matcher m1 = p1.matcher(email);
+
+        if (m1.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean checkPassword(String pass) {
+
+        if (pass.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
 
     @Override
     public boolean validateEmail(String email) {
@@ -47,31 +104,40 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
         }
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+    //Change UI according to user data.
+    public void updateUI(FirebaseUser account) {
 
-        input_email = (EditText) findViewById(R.id.editTextTextEmailAddressLogIn);
-        input_password = (EditText)  findViewById(R.id.editTextPasswordLogIn);
-        log_in = (Button) findViewById(R.id.loginButton);
-        dialogue = (TextView) findViewById(R.id.alertMessageTextView);
+        if (account != null) {
+            Toast.makeText(this, "You have signed in", Toast.LENGTH_LONG).show();
+            //User is an instructor
+            if(isInstructor) {
+                Intent intent = new Intent(LogIn.this, Homepage.class);
+                startActivity(intent);
+            }
+            //User is a student
+            } else if (!isInstructor) {
+                    Intent intent = new Intent(LogIn.this, HomepageStudent.class);
+                    startActivity(intent);
+            }
+        else{
+            Toast.makeText(this, "You're not signed in", Toast.LENGTH_LONG).show();
+        }
 
     }
-
-    public void OnClickReturnToWelcome(View view){
-        Intent intent = new Intent(this,Welcome.class);
-        startActivity(intent);
-    }
-
-    public void OnClickGoToRegistration(View view){
-        Intent intent = new Intent(this,Registration.class);
-        startActivity(intent);
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
     String email_string;
     String password_string;
-    String verification;
+
+    int index;
     public void OnClickLogIn(View view){
+
         email_string = input_email.getText().toString();
 
         //If check e-mail and toast if invalid
@@ -83,54 +149,30 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
         password_string = input_password.getText().toString();
 
+        if(!checkPassword(password_string)){
+            Toast.makeText(getApplicationContext(), "Please enter a password.", Toast.LENGTH_SHORT).show();
+            dialogue.setText("Please enter a password.");
+            return;
+        }
+        isInstructor = checkInstructorStatus(email_string);
 
-        //Check if e-mail exists in database.
-      for(int i=0; i<emails.length; i++){
+        mAuth.signInWithEmailAndPassword(email_string, password_string)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
-          //Search for email in the data
-          //Email found
-         if (email_string.equals(emails[i])){
-             //Search Password //Password Found
-             if (password_string.equals(passwords[i])){
-                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-
-                 logged_in = true;
-                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LogIn.this);
-                 SharedPreferences.Editor editor = preferences.edit();
-                 editor.putString("user_id", user_ids[i]);
-                 editor.putString("name",names[i]);
-                 editor.putString("role_num", roles[i]);
-                 editor.apply();
-
-                 if(logged_in) {
-                     //User is an instructor
-                     if(roles[i].equalsIgnoreCase("1")){
-                         Intent intent = new Intent(LogIn.this, Homepage.class);
-                         startActivity(intent);
-                         return;
-
-                         //User is a student
-                     }else if(roles[i].equalsIgnoreCase("2")){
-                         Intent intent = new Intent(LogIn.this, HomepageStudent.class);
-                         startActivity(intent);
-                         return;
-                     }
-
-                 }
-             }
-             //Password not found
-             else{
-                 Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
-                 dialogue.setText("Incorrect Password");
-                 return;
-             }
-             //Email not found
-         }else {
-             Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
-             dialogue.setText("User not registered");
-             return;
-         }
-      }
-
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LogIn.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
     }
 }
