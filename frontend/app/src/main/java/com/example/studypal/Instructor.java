@@ -18,7 +18,7 @@ public class Instructor extends User {
     }
 
     public void addTask(String name, String type, String section, int study_hours, String status,
-                        ArrayList<Material> materials) {
+                        String materials) {
         Task task = new Task(name, type, section, study_hours, "Incomplete", materials);
     }
 

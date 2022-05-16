@@ -2,6 +2,8 @@ package com.example.studypal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,6 +39,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -50,6 +53,10 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
     BottomNavigationView bottomNavigationView;
     String user_id;
     String name;
+
+    private RecyclerView.Adapter adapter2;
+    private RecyclerView recyclerView_taskList;
+    ArrayList<Task> task = new ArrayList<>();
 
     ImageView img1;
     ImageView img2;
@@ -113,6 +120,11 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
     }
 
     @Override
+    public void onBackPressed() {
+        // empty so nothing happens
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
@@ -138,28 +150,28 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
         startActivity(intent);
 
     }
-//
-//    public void OnClickOpenActivity(View view){
-//        String tag = view.getTag().toString();
-//        Intent intent = new Intent(this,ActivitiesPage.class);
-//        intent.putExtra("activity_tag", tag);
-//        if(tag.equalsIgnoreCase("txt_n_1") || tag.equalsIgnoreCase("txt_d_1")) {
-//            intent.putExtra("activity_id", activity1_id);
-//            startActivity(intent);
-//        }else if (tag.equalsIgnoreCase("txt_n_2") || tag.equalsIgnoreCase("txt_d_2")) {
-//            intent.putExtra("activity_id", activity2_id);
-//            startActivity(intent);
-//        }else if (tag.equalsIgnoreCase("txt_n_3") || tag.equalsIgnoreCase("txt_d_3")) {
-//            intent.putExtra("activity_id", activity3_id);
-//            startActivity(intent);
-//        }
-//
-//    }
 
     public void OnClicklogOut(View view){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(Homepage.this, LogIn.class);
         startActivity(intent);
+    }
+
+    private void recyclerView_Popular() {
+
+        // Creates a horizontal LinearLayoutManager to enable to move between tasks
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_taskList = findViewById(R.id.recyclerView);
+        recyclerView_taskList.setLayoutManager(linearLayoutManager);
+
+        task.add(new Task("Task 1", "work_process_img"));
+        task.add(new Task("Task 2", "work_process_img"));
+        task.add(new Task("Task 3", "work_process_img"));
+        task.add(new Task("Task 4", "work_process_img"));
+
+
+        adapter2 = new TasksAdapter(task);
+        recyclerView_taskList.setAdapter(adapter2);
     }
 
 }
