@@ -76,17 +76,14 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
     }
 
     public boolean checkPassword(String pass) {
-
         if (pass.isEmpty()) {
             return false;
         }
-
         return true;
     }
 
     @Override
     public boolean validateEmail(String email) {
-
         //Ensure a valid email is input.
         Pattern p1 = Pattern.compile("(^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$)");
         Matcher m1 = p1.matcher(email_string);
@@ -101,7 +98,6 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
     //Change UI according to user data.
     public void updateUI(FirebaseUser account) {
-
         if (account != null) {
             Toast.makeText(this, "You have signed in", Toast.LENGTH_LONG).show();
         }
@@ -119,13 +115,14 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
     }
 
 
-    int index;
     public void OnClickLogIn(View view){
 
         email_string = input_email.getText().toString();
 
         //If check e-mail and toast if invalid
-        if (!validateEmail(email_string)){
+        boolean result = validateEmail(email_string);
+        Log.e("Result", String.valueOf(result))
+        if (!result){
             Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             dialogue.setText("Please enter a valid email address.");
             return;

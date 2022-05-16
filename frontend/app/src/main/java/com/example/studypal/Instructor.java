@@ -18,8 +18,8 @@ public class Instructor extends User {
     }
 
     public void addTask(String name, String type, String section, int study_hours, String status,
-                        String materials) {
-        Task task = new Task(name, type, section, study_hours, "Incomplete", materials);
+                        String materials, String img) {
+        Task task = new Task(name, type, section, study_hours, "Incomplete", materials, img);
     }
 
     public void deleteTask(String task_name) {

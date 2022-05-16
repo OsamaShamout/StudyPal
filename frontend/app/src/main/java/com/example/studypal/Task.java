@@ -1,9 +1,10 @@
 package com.example.studypal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //! Task needs a getStatus and setProgress methods
-public class Task  {
+public class Task implements Serializable {
     private String name;
     private String type;
     private String section;
@@ -14,22 +15,18 @@ public class Task  {
     private String materials;
 
     public Task(String name, String type, String section, float study_hours, String status,
-                String materials) {
+                String materials, String img) {
         this.name = name;
         this.type = type;
         this.section = section;
         this.study_hours = study_hours;
         this.status = status;
         this.materials = materials;
-
+        this.img = img;
         // this.timer = new Timer(0,0,0)
         this.progress = 0;
     }
 
-    public Task(String name, String img) {
-        this.name = name;
-        this.img = img;
-    }
 
     public void viewTask() {
         System.out.println("Task name: " + this.name);
@@ -47,7 +44,7 @@ public class Task  {
 
     }
 
-    public void updateTask(String name, String type, String section, int study_hours, String status,
+    public void updateTask(String name, String type, String section, float study_hours, String status,
                            String materials) {
         this.name = name;
         this.type = type;
@@ -101,7 +98,7 @@ public class Task  {
         return study_hours;
     }
 
-    public void setStudy_hours(int study_hours) {
+    public void setStudy_hours(float study_hours) {
         this.study_hours = study_hours;
     }
 

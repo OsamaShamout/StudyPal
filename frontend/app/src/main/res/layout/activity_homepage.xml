@@ -14,6 +14,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="283dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="#000A67"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:onClick="OnClicklogOut"
@@ -54,157 +55,29 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="667dp"
+        android:backgroundTint="#000A67"
         android:minWidth="48dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/logoutButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/stat_notify_chat"
+        app:srcCompat="@drawable/ic_alert"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="300dp"
-        android:layout_height="213dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="405dp"
+        android:layout_height="191dp"
+        android:layout_marginTop="28dp"
+        android:clipToPadding="true"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62"
-        tools:ignore="SpeakableTextPresentCheck">
-
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/linearMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:tag="num1">
-
-
-                <TextView
-                    android:id="@+id/activityTextView1"
-                    android:layout_width="154dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|start"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:onClick="OnClickOpenActivity"
-                    android:tag="txt_n_1"
-                    android:textAllCaps="false"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/activityDate1"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|clip_horizontal|start|left"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:tag="txt_d_1"
-                    android:textColor="#606065"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:tag="num2">
-
-                <TextView
-                    android:id="@+id/activityTextView2"
-                    android:layout_width="154dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|start"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:onClick="OnClickOpenActivity"
-                    android:tag="txt_n_2"
-                    android:textAllCaps="false"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/activityDate2"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|clip_horizontal|start|left"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:onClick="OnClickOpenActivity"
-                    android:tag="txt_d_2"
-                    android:textColor="#606065"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:tag="num3">
-
-
-                <TextView
-                    android:id="@+id/activityTextView3"
-                    android:layout_width="154dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|start"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:onClick="OnClickOpenActivity"
-                    android:tag="txt_n_3"
-                    android:textAllCaps="false"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/activityDate3"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|clip_horizontal|start|left"
-                    android:background="#F9F9F9"
-                    android:fontFamily="@font/poppins_medium"
-                    android:onClick="OnClickOpenActivity"
-                    android:tag="txt_d_3"
-                    android:textColor="#606065"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavMenu"
-        android:layout_width="410dp"
-        android:layout_height="75dp"
-        android:background="#FFFFFF"
-        app:itemIconSize="24dp"
-        app:itemIconTint="#BAB9D0"
-        app:itemPaddingBottom="0dp"
-        app:itemPaddingTop="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/nav_menu">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:layout_constraintTop_toBottomOf="@+id/assignedTasks" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton3"
@@ -243,25 +116,29 @@
         android:id="@+id/viwStudentActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#000A67"
         android:text="View Section Activity"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.904" />
 
     <Button
         android:id="@+id/viewStudentActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#000A67"
         android:text="View Student Activity"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.904" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

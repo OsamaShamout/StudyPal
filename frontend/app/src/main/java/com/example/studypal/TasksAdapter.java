@@ -2,6 +2,7 @@ package com.example.studypal;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), TaskDetailsActivity.class);
-                //intent.putExtra("object", tasksDomains.get(position));
+                intent.putExtra("object", tasksDomains.get(position));
                 holder.itemView.getContext().startActivity(intent);
             }
         });

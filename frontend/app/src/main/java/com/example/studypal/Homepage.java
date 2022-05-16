@@ -46,31 +46,17 @@ import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class Homepage extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+public class Homepage extends AppCompatActivity {
 
     ImageButton log_out;
     TextView greetings;
-    BottomNavigationView bottomNavigationView;
+
     String user_id;
     String name;
 
     private RecyclerView.Adapter adapter2;
     private RecyclerView recyclerView_taskList;
     ArrayList<Task> task = new ArrayList<>();
-
-    ImageView img1;
-    ImageView img2;
-    ImageView img3;
-
-    //Name Texts
-    TextView txt_n1;
-    TextView txt_n2;
-    TextView txt_n3;
-
-    //Date Texts
-    TextView txt_d1;
-    TextView txt_d2;
-    TextView txt_d3;
 
     Calendar right_now;
 
@@ -96,27 +82,27 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
             greetings.setText("Good evening,\n" +name+"!");
         }
 
-        Log.e("Name is: ", name);
-
-         txt_n1 = findViewById(R.id.activityTextView1);
-         txt_n2  = findViewById(R.id.activityTextView2);
-         txt_n3  = findViewById(R.id.activityTextView3);
-
-
-         txt_d1 = findViewById(R.id.activityDate1);
-         txt_d2 = findViewById(R.id.activityDate2);
-         txt_d3 = findViewById(R.id.activityDate3);
-
-
-         Log.e("Hour is ", String.valueOf(hour));
+        recyclerView_Popular();
 
 
         log_out = (ImageButton) findViewById(R.id.logoutButton);
+    }
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
 
-        bottomNavigationView.setOnItemSelectedListener(this);
+    public RecyclerView getRecyclerView_taskList() {
+        return recyclerView_taskList;
+    }
 
+    public void setRecyclerView_taskList(RecyclerView recyclerView_taskList) {
+        this.recyclerView_taskList = recyclerView_taskList;
+    }
+
+    public ArrayList<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(ArrayList<Task> task) {
+        this.task = task;
     }
 
     @Override
@@ -124,31 +110,9 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
         // empty so nothing happens
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        switch(id){
-            case R.id.home:
-                Toast.makeText(getApplicationContext(), "You are already in home page.", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.favorites:
-                Intent intent = new Intent(this,FavoritePage.class);
-                startActivity(intent);
-                break;
-            case R.id.profile:
-                Intent intent2 = new Intent(this,Profile.class);
-                startActivity(intent2);
-                break;
-        }
-
-        return false;
-    }
-
     public void OnClickCreateNewActivity(View view){
         Intent intent = new Intent(this,CreateActivity.class);
         startActivity(intent);
-
     }
 
     public void OnClicklogOut(View view){
@@ -164,10 +128,10 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
         recyclerView_taskList = findViewById(R.id.recyclerView);
         recyclerView_taskList.setLayoutManager(linearLayoutManager);
 
-        task.add(new Task("Task 1", "work_process_img"));
-        task.add(new Task("Task 2", "work_process_img"));
-        task.add(new Task("Task 3", "work_process_img"));
-        task.add(new Task("Task 4", "work_process_img"));
+        task.add(new Task("Task 1", "Exam", "S11", 10,"Incomplete","Chapter 1, Chapter 2, Chapter 3", "work_process_img"));
+        task.add(new Task("Task 2", "Material", "S31", 2,"Incomplete","Chapter 3", "work_process_img"));
+        task.add(new Task("Task 3", "Material", "S31", 2,"Incomplete","Chapter 4", "work_process_img"));
+        task.add(new Task("Task 4", "Material", "S11", 5,"Incomplete","Chapter 5", "work_process_img"));
 
 
         adapter2 = new TasksAdapter(task);

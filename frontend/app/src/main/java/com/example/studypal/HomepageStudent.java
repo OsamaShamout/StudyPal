@@ -89,10 +89,11 @@ public class HomepageStudent extends AppCompatActivity {
         recyclerView_taskList = findViewById(R.id.recyclerView);
         recyclerView_taskList.setLayoutManager(linearLayoutManager);
 
-        task.add(new Task("Task 1", "work_process_img"));
-        task.add(new Task("Task 2", "work_process_img"));
-        task.add(new Task("Task 3", "work_process_img"));
-        task.add(new Task("Task 4", "work_process_img"));
+        task.add(new Task("Task 1", "Exam", "S11", 10,"Incomplete","Chapter 1, Chapter 2, Chapter 3", "work_process_img"));
+        task.add(new Task("Task 2", "Material", "S31", 2,"Incomplete","Chapter 3", "work_process_img"));
+        task.add(new Task("Task 3", "Material", "S31", 2,"Incomplete","Chapter 4", "work_process_img"));
+        task.add(new Task("Task 4", "Material", "S11", 5,"Incomplete","Chapter 5", "work_process_img"));
+
 
 
         adapter2 = new TasksAdapter(task);
