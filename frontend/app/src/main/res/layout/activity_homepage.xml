@@ -12,14 +12,20 @@
         android:id="@+id/logoutButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginStart="283dp"
+        android:layout_marginEnd="16dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:onClick="logOut"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/notificationsButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/log_out_white"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/greetingsMessage"
@@ -45,23 +51,28 @@
         android:id="@+id/notificationsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="667dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:srcCompat="@android:drawable/stat_notify_chat"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScoll1"
-        android:layout_width="371dp"
-        android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintEnd_toStartOf="@+id/logoutButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47000003"
+        app:srcCompat="@android:drawable/stat_notify_chat"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="265dp"
+        android:layout_height="234dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62"
         tools:ignore="SpeakableTextPresentCheck">
 
 
@@ -72,7 +83,7 @@
             android:id="@+id/linearMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -175,7 +186,7 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavMenu"
@@ -203,20 +214,30 @@
         android:hapticFeedbackEnabled="false"
         android:onClick="OnClickCreateNewActivity"
         app:backgroundTint="#7DD5DB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.795"
         app:srcCompat="@drawable/plus_sign"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="338dp"
-        tools:layout_editor_absoluteY="496dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/assignedTasks"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="293dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Assigned Tasks:"
         android:textColor="#4F4F4F"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="263dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.378" />
 
     <Button
         android:id="@+id/viwStudentActivityButton"
@@ -225,18 +246,22 @@
         android:text="View Section Activity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.853" />
 
     <Button
         android:id="@+id/viewStudentActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Student Activity"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="474dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.853" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,7 +61,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ScrollView
-        android:id="@+id/horizontalScoll1"
+        android:id="@+id/scroll"
         android:layout_width="300dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
