@@ -14,15 +14,50 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+
+
 public class HomepageStudent extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     private RecyclerView.Adapter adapter2;
     private RecyclerView recyclerView_taskList;
+    ArrayList<Task> task;
+
+    public RecyclerView.Adapter getAdapter2() {
+        return adapter2;
+    }
+
+    public void setAdapter2(RecyclerView.Adapter adapter2) {
+        this.adapter2 = adapter2;
+    }
+
+    public RecyclerView getRecyclerView_taskList() {
+        return recyclerView_taskList;
+    }
+
+    public void setRecyclerView_taskList(RecyclerView recyclerView_taskList) {
+        this.recyclerView_taskList = recyclerView_taskList;
+    }
+
+    public ArrayList<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(ArrayList<Task> task) {
+        this.task = task;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hompeage_student);
         recyclerView_Popular();
 
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    public void onBackPressed() {
+    // empty so nothing happens
     }
 
     public void OnClicklogOut(View view){
@@ -32,9 +67,7 @@ public class HomepageStudent extends AppCompatActivity {
         logout1.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(HomepageStudent.this, Welcome.class);
-                startActivity(intent);
+              FirebaseAuth.getInstance().signOut();
             }
         });
         logout1.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
@@ -54,7 +87,7 @@ public class HomepageStudent extends AppCompatActivity {
         recyclerView_taskList = findViewById(R.id.recyclerView);
         recyclerView_taskList.setLayoutManager(linearLayoutManager);
 
-        ArrayList<Task> task = new ArrayList<>();
+        task = new ArrayList<>();
         task.add(new Task("Task 1", "work_process_img"));
         task.add(new Task("Task 2", "work_process_img"));
         task.add(new Task("Task 3", "work_process_img"));

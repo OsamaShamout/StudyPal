@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 
 public class LogIn extends AppCompatActivity implements ValidateInformation {
     private FirebaseAuth mAuth;
-    boolean logged_in = false;
 
     String[] user_ids = {"1", "2", "3","4"};
     String[] roles = {"2", "2", "1", "1"};

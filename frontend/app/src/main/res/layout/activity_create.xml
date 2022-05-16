@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CreateActivity">
 
-    <Spinner
-        android:id="@+id/listofMaterials"
-        android:layout_width="271dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginBottom="23dp"
-        android:contentDescription="List of sections provided"
-        android:textSize="12sp"
-        android:theme="@style/mySpinnerItemStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.726"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <TextView
         android:id="@+id/materialTextView"
         android:layout_width="wrap_content"
@@ -36,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <Spinner
         android:id="@+id/listofSections"
@@ -269,5 +252,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.279"
         tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="271dp"
+        android:layout_height="38dp"
+        android:gravity="center|left"
+        android:text="Set Material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.792"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

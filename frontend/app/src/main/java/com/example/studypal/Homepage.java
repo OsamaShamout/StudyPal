@@ -79,8 +79,6 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
         greetings = (TextView) findViewById(R.id.greetingsMessage);
         right_now = Calendar.getInstance();
 
-
-
         int hour = right_now.get(Calendar.HOUR);
         if(hour >= 5 && hour <=11){
             greetings.setText("Good Morning,\n" + name+"!");
