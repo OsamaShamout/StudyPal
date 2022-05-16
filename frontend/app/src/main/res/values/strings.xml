@@ -40,11 +40,6 @@
     </string-array>
 
 
-    <string-array name="list_materials">
-        <item>Chapter 1</item>
-        <item>Chapter 2</item>
-    </string-array>
-
     <string-array name="list_of_roles">
         <item>Choose a role number</item>
         <item>Administrator 0</item>

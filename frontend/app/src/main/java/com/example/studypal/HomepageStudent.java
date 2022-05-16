@@ -34,7 +34,7 @@ public class HomepageStudent extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private RecyclerView.Adapter adapter2;
     private RecyclerView recyclerView_taskList;
-    ArrayList<Task> task;
+    ArrayList<Task> task = new ArrayList<>();
 
     public RecyclerView.Adapter getAdapter2() {
         return adapter2;
@@ -87,6 +87,8 @@ public class HomepageStudent extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
               FirebaseAuth.getInstance().signOut();
+              Intent intent = new Intent(HomepageStudent.this, Welcome.class);
+              startActivity(intent);
             }
         });
         logout1.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
@@ -106,11 +108,11 @@ public class HomepageStudent extends AppCompatActivity {
         recyclerView_taskList = findViewById(R.id.recyclerView);
         recyclerView_taskList.setLayoutManager(linearLayoutManager);
 
-        task = new ArrayList<>();
         task.add(new Task("Task 1", "work_process_img"));
         task.add(new Task("Task 2", "work_process_img"));
         task.add(new Task("Task 3", "work_process_img"));
         task.add(new Task("Task 4", "work_process_img"));
+
 
         adapter2 = new TasksAdapter(task);
         recyclerView_taskList.setAdapter(adapter2);

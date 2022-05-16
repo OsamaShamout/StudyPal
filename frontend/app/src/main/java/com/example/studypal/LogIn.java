@@ -27,20 +27,16 @@ import java.util.regex.Pattern;
 public class LogIn extends AppCompatActivity implements ValidateInformation {
     private FirebaseAuth mAuth;
 
-    String[] user_ids = {"1", "2", "3","4"};
-    String[] roles = {"2", "2", "1", "1"};
-    String[] emails = {"osama@lau.edu","omar@lau.edu", "bilal@lau.edu", "sameer@lau.edu"};
-    String[] names = {"Osama Shamout", "Omar Mlaeb", "Bilal Hamdanieh", "Sameer Al Jabari "};
-    String[] passwords = {"123123_Osama", "123123_Omar", "123123_Bilal", "123123_Sameer"};
     EditText input_email;
     EditText input_password;
     TextView dialogue;
 
     Button log_in;
 
-    int user_id;
 
     boolean isInstructor = false;
+    String email_string;
+    String password_string;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +51,13 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
     }
 
-    public void OnClickReturnToWelcome(View view){
-        Intent intent = new Intent(this,Welcome.class);
-        startActivity(intent);
+    @Override
+    public void onBackPressed() {
+        // empty so nothing happens
     }
 
-    public void OnClickGoToRegistration(View view){
-        Intent intent = new Intent(this,Registration.class);
+    public void OnClickReturnToWelcome(View view){
+        Intent intent = new Intent(this,Welcome.class);
         startActivity(intent);
     }
 
@@ -108,16 +104,7 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
         if (account != null) {
             Toast.makeText(this, "You have signed in", Toast.LENGTH_LONG).show();
-            //User is an instructor
-            if(isInstructor) {
-                Intent intent = new Intent(LogIn.this, Homepage.class);
-                startActivity(intent);
-            }
-            //User is a student
-            } else if (!isInstructor) {
-                    Intent intent = new Intent(LogIn.this, HomepageStudent.class);
-                    startActivity(intent);
-            }
+        }
         else{
             Toast.makeText(this, "You're not signed in", Toast.LENGTH_LONG).show();
         }
@@ -131,8 +118,6 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
         updateUI(currentUser);
     }
 
-    String email_string;
-    String password_string;
 
     int index;
     public void OnClickLogIn(View view){
@@ -164,7 +149,16 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            //User is an instructor
+                            if(isInstructor) {
+                                Intent intent = new Intent(LogIn.this, Homepage.class);
+                                startActivity(intent);
+                            }
+                            //User is a student
+                             else if (!isInstructor) {
+                            Intent intent = new Intent(LogIn.this, HomepageStudent.class);
+                            startActivity(intent);
+                             }
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LogIn.this, "Authentication failed.",

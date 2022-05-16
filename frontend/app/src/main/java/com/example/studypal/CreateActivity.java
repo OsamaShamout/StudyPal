@@ -63,7 +63,7 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
     boolean[] selectedMaterial;
     ArrayList<Integer> materialList = new ArrayList<>();
 
-    String[] materialArray = {"Java", "C++", "Kotlin", "C", "Python", "Javascript"};
+    String[] materialArray = {"Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +88,13 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
         spinner_list_sections.setOnItemSelectedListener(this);
         spinner_list_sections.setPrompt("Set Task Section:");
 
-        //Define the spinner of sections
-        spinner_list_materials= (Spinner) findViewById(R.id.listofSections);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.list_materials, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_list_materials.setAdapter(adapter2);
-        spinner_list_materials.setOnItemSelectedListener(this);
-        spinner_list_materials.setPrompt("Set Material(s):");
+//        //Define the spinner of materials
+//        spinner_list_materials= (Spinner) findViewById(R.id.listofSections);
+//        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.list_materials, android.R.layout.simple_spinner_item);
+//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner_list_materials.setAdapter(adapter2);
+//        spinner_list_materials.setOnItemSelectedListener(this);
+//        spinner_list_materials.setPrompt("Set Material(s):");
 
         time_study = (EditText) findViewById(R.id.timeStudyEditText);
 
@@ -111,7 +111,7 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateActivity.this);
 
                 // set title
-                builder.setTitle("Select Language");
+                builder.setTitle("Select Material");
 
                 // set dialog non cancelable
                 builder.setCancelable(false);
@@ -202,15 +202,6 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
         startActivity(intent);
     }
 
-   public boolean verifyStudyHours(String hours){
-       study_hours = Integer.parseInt(time_study.getText().toString());
-
-       if (!(study_hours >=0)){
-           return false;
-       }
-       return true;
-   }
-
    public boolean checkTaskName(String name){
        //Ensure a task name is given.
        Pattern p1 = Pattern.compile("^(\\s?)+((.)+)");
@@ -238,6 +229,44 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
         }
 
     }
+
+    public boolean checkMaterials(String materials){
+        if(materials.isEmpty() || materials.equals("") || materials.equalsIgnoreCase("Set Material")){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkType(String type){
+        if(type.isEmpty() || type.equals("") || type.equalsIgnoreCase("Choose Type")){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkSection(String section){
+        if(section.isEmpty() || section.equals("") || section.equalsIgnoreCase("Choose Section(s)")){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifyStudyHours(String hours){
+        try{
+            study_hours = Float.parseFloat(time_study.getText().toString());
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Invalid Data Input", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        if (!(study_hours >=0)){
+            return false;
+        }
+        return true;
+    }
+
 
     String task_type;
     String section;
@@ -267,44 +296,47 @@ public class CreateActivity extends AppCompatActivity implements AdapterView.OnI
         int number = spinner_list_types.getSelectedItemPosition();
         task_type = spinner_list_types.getItemAtPosition(number).toString();
 
+        if(!checkType(task_type)){
+            Toast.makeText(getApplicationContext(), "Invalid Task Type Input", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //Obtain Task Section
         AdapterView<?> parent2 = spinner_list_sections;
         int number2 = spinner_list_sections.getSelectedItemPosition();
         section = spinner_list_sections.getItemAtPosition(number2).toString();
 
-        //Obtain Task Material
-        AdapterView<?> parent3 = spinner_list_materials;
-        int number3 = spinner_list_sections.getSelectedItemPosition();
-        section = spinner_list_sections.getItemAtPosition(number3).toString();
+        if(!checkSection(section)){
+            Toast.makeText(getApplicationContext(), "Invalid Section Input", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        materials = textView.getText().toString();
+        Log.e("Material:", materials);
+
+        if(!checkMaterials(materials)){
+            Toast.makeText(getApplicationContext(), "Invalid Material Input", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        //Obtain Study Hours Section and check condition
+        if(!(verifyStudyHours(time_study.getText().toString()))){
+            //If study hours less than 0
+            Toast.makeText(getApplicationContext(), "Hours must be greater than 0.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         HomepageStudent page = new HomepageStudent();
-        page.getTask().add(task_name_string, task_type, section, )
+
+        Task task1 = new Task(task_name_string,task_type, section, study_hours, "Incomplete", materials);
+
+        Log.e("Task added is:", task1.toString());
+        page.getTask().add(task1);
+
+        Toast.makeText(getApplicationContext(), "Task Added Successfully", Toast.LENGTH_SHORT).show();
 
 
-//
-//        protected void onPostExecute(String s){
-//            super.onPostExecute(s);
-//            try {
-//                Log.e("TAG POST:",s);
-//                if(s.equalsIgnoreCase("Success\n")){
-//                    Toast.makeText(getApplicationContext(), "Activity Created Successfully", Toast.LENGTH_SHORT).show();
-//                    logged_in = true;
-//                    //Validate Information from DB
-//                    if(logged_in) {
-//                        Intent intent = new Intent(CreateActivity.this, Homepage.class);
-//                        startActivity(intent);
-//                    }
-//
-//                }
-//
-//
-//
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//                Toast.makeText(getApplicationContext(), "Error in receiving data.", Toast.LENGTH_LONG).show();
-//            }
-//
-//        }
     }
 }

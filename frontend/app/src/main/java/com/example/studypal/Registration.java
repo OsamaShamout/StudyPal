@@ -169,6 +169,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        // empty so nothing happens
+    }
+
     public boolean checkRepeatPassword(String pass) {
 
         if (pass.isEmpty()) {

@@ -9,12 +9,12 @@ public class Task  {
     private String section;
     private String img;
     private int progress; // represented as 0-100%
-    private int study_hours;
+    private float study_hours;
     private String status;
-    private ArrayList<Material> materials;
+    private String materials;
 
-    public Task(String name, String type, String section, int study_hours, String status,
-                ArrayList<Material> materials) {
+    public Task(String name, String type, String section, float study_hours, String status,
+                String materials) {
         this.name = name;
         this.type = type;
         this.section = section;
@@ -81,9 +81,7 @@ public class Task  {
         System.out.println("Task type: " + this.type);
         System.out.println("Task section: " + this.section);
         System.out.println("Task study hours: " + this.study_hours);
-        for (Material material : materials) {
-            material.getMaterial();
-        }
+
     }
 
     public void updateRecords() {
@@ -95,7 +93,7 @@ public class Task  {
     }
 
     public void updateTask(String name, String type, String section, int study_hours, String status,
-                           ArrayList<Material> materials) {
+                           String materials) {
         this.name = name;
         this.type = type;
         this.section = section;
@@ -144,7 +142,7 @@ public class Task  {
         this.progress = progress;
     }
 
-    public int getStudy_hours() {
+    public float getStudy_hours() {
         return study_hours;
     }
 
@@ -156,11 +154,11 @@ public class Task  {
         this.status = status;
     }
 
-    public ArrayList<Material> getMaterials() {
+    public String getMaterials() {
         return materials;
     }
 
-    public void setMaterials(ArrayList<Material> materials) {
+    public void setMaterials(String materials) {
         this.materials = materials;
     }
 
@@ -181,5 +179,19 @@ public class Task  {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", section='" + section + '\'' +
+                ", img='" + img + '\'' +
+                ", progress=" + progress +
+                ", study_hours=" + study_hours +
+                ", status='" + status + '\'' +
+                ", materials='" + materials + '\'' +
+                '}';
     }
 }
