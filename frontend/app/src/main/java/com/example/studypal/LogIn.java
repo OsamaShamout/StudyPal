@@ -4,38 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class LogIn extends AppCompatActivity implements ValidateInformation {
 
     boolean logged_in = false;
 
+    String[] user_ids = {"1", "2", "3","4"};
+    String[] roles = {"2", "2", "1", "1"};
+    String[] emails = {"osama@lau.edu","omar@lau.edu", "azzam@lau.edu.lb", "sanaa@lau.edu.lb"};
+    String[] names = {"Osama Shamout", "Omar Mlaeb", "Azzam Mourad", "Sanaa Sharafeddine"};
+    String[] passwords = {"123123_Osama", "123123_Omar", "123123_Azzam", "123123_Sanaa"};
     EditText input_email;
     EditText input_password;
     TextView dialogue;
@@ -81,7 +68,8 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
         startActivity(intent);
     }
 
-
+    String email_string;
+    String password_string;
     String verification;
     public void OnClickLogIn(View view){
         email_string = input_email.getText().toString();
@@ -90,165 +78,59 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
         if (!validateEmail(email_string)){
             Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             dialogue.setText("Please enter a valid email address.");
+            return;
         }
 
         password_string = input_password.getText().toString();
 
+
         //Check if e-mail exists in database.
-        //Check if passwords match.
-        String url1 = "https://mcprojs.000webhostapp.com/backend_se/log_in.php";
+      for(int i=0; i<emails.length; i++){
 
-        //Perform to check conditions
-        //Upon success page intent to HomePage (from method).
-        SendLogInToDB task1 = new SendLogInToDB();
-        task1.execute(url1);
+          //Search for email in the data
+          //Email found
+         if (email_string.equals(emails[i])){
+             //Search Password //Password Found
+             if (password_string.equals(passwords[i])){
+                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-    }
+                 logged_in = true;
+                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LogIn.this);
+                 SharedPreferences.Editor editor = preferences.edit();
+                 editor.putString("user_id", user_ids[i]);
+                 editor.putString("name",names[i]);
+                 editor.putString("role_num", roles[i]);
+                 editor.apply();
 
-    //                  ---------------------------------------------------
-    //                                      APIs Log In
-    //                  ---------------------------------------------------
+                 if(logged_in) {
+                     //User is an instructor
+                     if(roles[i].equalsIgnoreCase("1")){
+                         Intent intent = new Intent(LogIn.this, Homepage.class);
+                         startActivity(intent);
+                         return;
 
-    //Send data to Log In.
-    String email_string;
-    String password_string;
+                         //User is a student
+                     }else if(roles[i].equalsIgnoreCase("2")){
+                         Intent intent = new Intent(LogIn.this, HomepageStudent.class);
+                         startActivity(intent);
+                         return;
+                     }
 
+                 }
+             }
+             //Password not found
+             else{
+                 Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
+                 dialogue.setText("Incorrect Password");
+                 return;
+             }
+             //Email not found
+         }else {
+             Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
+             dialogue.setText("User not registered");
+             return;
+         }
+      }
 
-    public class SendLogInToDB extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... urls) {
-
-
-            //Variables to initiate connection.
-            URL url;
-            HttpsURLConnection conn;
-
-            try {
-                //Establishing connection between application and API.
-                url = new URL(urls[0]);
-                conn = (HttpsURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Accept-Charset", "UTF-8");
-
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
-
-                conn.connect();
-
-                //Creating new JSON object to communicate with it to DB.
-                JSONObject jo = new JSONObject();
-                StringBuffer packedData = new StringBuffer();
-
-                //Send the variables to their respective $_POST.
-                jo.put("email", email_string);
-                jo.put("password", password_string);
-
-                //Pack data to be processed by PHP for $_POST.
-                boolean firstValue = true;
-
-                Iterator it = jo.keys();
-
-                do {
-                    String key = it.next().toString();
-                    String value = jo.get(key).toString();
-
-                    if (firstValue) {
-                        firstValue = false;
-                    } else {
-                        packedData.append("&");
-                    }
-
-                    packedData.append(URLEncoder.encode(key, "UTF-8"));
-                    packedData.append("=");
-                    packedData.append(URLEncoder.encode(value, "UTF-8"));
-
-                } while (it.hasNext());
-
-                //Log in console to track. "e" used as color red will appear more significantly while reading log.
-                Log.e("Packed data:", packedData.toString());
-
-                //Write to PHP file.
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-
-                wr.write(packedData.toString());
-                wr.flush();
-                wr.close();
-
-                //InputStreams to obtain input from API..
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder total = new StringBuilder();
-                String line;
-                int serverResponseCode = conn.getResponseCode();
-                String serverResponseMessage = conn.getResponseMessage();
-                while ((line = in.readLine()) != null) {
-                    total.append(line).append('\n');
-                }
-                Log.e("Tag", "Server Response is:" + total.toString() + ": " + serverResponseMessage + "\nResponse Code is: " + serverResponseCode);
-
-                verification = total.toString();
-
-                //Log server return.
-                Log.e("test", "result from server: " + verification);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return verification;
-
-        }
-
-
-        protected void onPostExecute(String s){
-            super.onPostExecute(s);
-            try {
-                Log.e("TAG POST:",s);
-
-                if(s.equalsIgnoreCase("User not registered\n")){
-                    Toast.makeText(getApplicationContext(), "User not registered", Toast.LENGTH_SHORT).show();
-                    dialogue.setText("User not registerd");
-                }else{
-                    String[] split_values = s.split("_");
-                    Log.e("Split return", split_values[0]);
-                    String returned_statement = split_values[0];
-
-                    if (returned_statement.equalsIgnoreCase("Password mismatch\n")) {
-                        Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
-                        dialogue.setText("Incorrect Password");
-                    }else if(returned_statement.equalsIgnoreCase("Password match")){
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-
-                        logged_in = true;
-                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LogIn.this);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("user_id",split_values[1]);
-                        editor.putString("name",split_values[2]);
-                        editor.putString("role_num",split_values[3]);
-                        editor.apply();
-
-                        Log.e("Split user_id", split_values[1]);
-                        Log.e("Split name", split_values[2]);
-                        Log.e("Split role", split_values[3]);
-
-                        //Validate Information from DB
-                        if(logged_in) {
-                            Intent intent = new Intent(LogIn.this, Homepage.class);
-                            startActivity(intent);
-                        }
-                    }
-
-                }
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error in receiving data.", Toast.LENGTH_LONG).show();
-            }
-
-        }
     }
 }
