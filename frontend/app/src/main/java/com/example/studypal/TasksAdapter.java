@@ -8,6 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+import com.bumptech.glide.Glide;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder>{
+
+=======
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +27,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     ArrayList<Task> tasksDomains; // array list of the the class task
 
     public TasksAdapter(ArrayList<Task> tasksDomains) { // constructor
@@ -26,7 +38,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     @Override
     public TasksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflate our layout
+<<<<<<< HEAD
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_task, parent,false);
+=======
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_viewholder_task, parent,false);
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
         return new TasksAdapter.ViewHolder(inflate);
     }
 
@@ -53,6 +69,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         return tasksDomains.size();
     }
 
+<<<<<<< HEAD
+    // ViewHolder contents with the item at the given position and also sets up some private fields to be used by RecyclerView
+=======
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         // creating variables for our views

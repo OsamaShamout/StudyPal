@@ -2,6 +2,8 @@ package com.example.studypal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,6 +39,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -44,6 +47,9 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 
 public class Homepage extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+
+    private RecyclerView.Adapter adapter2;
+    private RecyclerView recyclerView_taskList;
 
     ImageButton log_out;
     TextView greetings;
@@ -110,6 +116,15 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
 
         bottomNavigationView.setOnItemSelectedListener(this);
 
+<<<<<<< HEAD
+        String url = "https://mcprojs.000webhostapp.com/backend_se/fetch_home.php";
+        GetActivitiesfromDB task = new GetActivitiesfromDB();
+        task.execute(url);
+
+        recyclerView_Popular();
+
+=======
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     }
 
     @Override
@@ -162,4 +177,242 @@ public class Homepage extends AppCompatActivity implements NavigationBarView.OnI
         startActivity(intent);
     }
 
+<<<<<<< HEAD
+    public void logOut(View view){
+
+        AlertDialog logout1 = new AlertDialog.Builder(Homepage.this).create();
+        logout1.setTitle("Log out");
+        logout1.setTitle("Are you sure you want to log out?");
+        logout1.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Homepage.this, LogIn.class);
+                startActivity(intent);
+            }
+        });
+        logout1.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        logout1.show();
+
+    }
+    //Initialize Activity Variables
+    String activity1_name = "";
+    String activity1_description = "";
+    String activity1_location = "";
+    String activity1_date = "";
+    String activity1_id = "";
+
+    String activity2_name = "";
+    String activity2_description = "";
+    String activity2_location  = "";
+    String activity2_date  = "";
+    String activity2_id = "";
+
+    String activity3_name  = "";
+    String activity3_description = "";
+    String activity3_location = "";
+    String activity3_date = "";
+    String activity3_id = "";
+
+    //Activity Dates Formatted Strings
+    String activity1_date_new = "";
+    String activity2_date_new = "";
+    String activity3_date_new = "";
+
+    String verification;
+    //Register User API
+    public class GetActivitiesfromDB extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... urls) {
+
+
+            //Variables to initiate connection.
+            URL url;
+            HttpsURLConnection conn;
+
+            try {
+                //Establishing connection between application and API.
+                url = new URL(urls[0]);
+                conn = (HttpsURLConnection) url.openConnection();
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Accept-Charset", "UTF-8");
+
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+
+                conn.connect();
+
+                //Creating new JSON object to communicate with it to DB.
+                JSONObject jo = new JSONObject();
+                StringBuffer packedData = new StringBuffer();
+
+                //Send the variables to their respective $_POST.
+                jo.put("user_id", user_id);
+
+                //Pack data to be processed by PHP for $_POST.
+                boolean firstValue = true;
+
+                Iterator it = jo.keys();
+
+                do {
+                    String key = it.next().toString();
+                    String value = jo.get(key).toString();
+
+                    if (firstValue) {
+                        firstValue = false;
+                    } else {
+                        packedData.append("&");
+                    }
+
+                    packedData.append(URLEncoder.encode(key, "UTF-8"));
+                    packedData.append("=");
+                    packedData.append(URLEncoder.encode(value, "UTF-8"));
+
+                } while (it.hasNext());
+
+                //Log in console to track. "e" used as color red will appear more significantly while reading log.
+                Log.e("Packed data:", packedData.toString());
+
+                //Write to PHP file.
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+
+                wr.write(packedData.toString());
+                wr.flush();
+                wr.close();
+
+                //InputStreams to obtain input from API..
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder total = new StringBuilder();
+                String line;
+                int serverResponseCode = conn.getResponseCode();
+                String serverResponseMessage = conn.getResponseMessage();
+                while ((line = in.readLine()) != null) {
+                    total.append(line).append('\n');
+                }
+                Log.e("Tag", "Server Response is:" + total.toString() + ": " + serverResponseMessage + "\nResponse Code is: " + serverResponseCode);
+
+                verification = total.toString();
+
+                //Log server return.
+                Log.e("test", "result from server: " + verification);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return verification;
+
+        }
+
+
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+
+                //Convert JSON Arrays into Strings.
+
+                JSONArray main_obj = new JSONArray(s);
+
+                String obj_str = main_obj.toString();
+
+
+                //Obtain the 3 activites
+                JSONObject activity1 = main_obj.getJSONObject(0);
+                JSONObject activity2 = main_obj.getJSONObject(1);
+                JSONObject activity3 = main_obj.getJSONObject(2);
+
+                Log.e("Activity 1: ", activity1.toString());
+                Log.e("Activity 2: ", activity2.toString());
+                Log.e("Activity 3: ", activity3.toString());
+
+                //Get the 3 activities data and convert to string
+                 activity1_name = activity1.getString("name");
+                 activity1_description = activity1.getString("description");
+                 activity1_location = activity1.getString("location");
+                 activity1_date = activity1.getString("date");
+                 activity1_id= activity1.getString("activity_id");
+
+                //Get the 3 activities data and convert to string
+                 activity2_name = activity2.getString("name");
+                 activity2_description = activity2.getString("description");
+                 activity2_location = activity2.getString("location");
+                 activity2_date = activity2.getString("date");
+                 activity2_id= activity2.getString("activity_id");
+
+                //Get the 3 activities data and convert to string
+                 activity3_name = activity3.getString("name");
+                 activity3_description = activity3.getString("description");
+                 activity3_location = activity3.getString("location");
+                 activity3_date = activity3.getString("date");
+                 activity3_id= activity3.getString("activity_id");
+
+                Log.e("Activity 1 name: ", activity1_name);
+                Log.e("Activity 1 date: ", activity1_date);
+                Log.e("Activity 3 ID: ", activity1_id);
+
+                Log.e("Activity 2 name: ", activity2_name);
+                Log.e("Activity 2 date: ", activity2_date);
+                Log.e("Activity 3 ID: ", activity2_id);
+
+                Log.e("Activity 3 name: ", activity3_name);
+                Log.e("Activity 3 date: ", activity3_date);
+                Log.e("Activity 3 ID: ", activity3_id);
+
+                SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+                Date dt1 = format1.parse(activity1_date);
+                Date dt2 = format1.parse(activity2_date);
+                Date dt3 = format1.parse(activity3_date);
+
+                //Format day name of event occurring
+                DateFormat format2 = new SimpleDateFormat("EEE, MMM d, ''yy");
+                activity1_date_new = format2.format(dt1);
+                activity2_date_new = format2.format(dt2);
+                activity3_date_new = format2.format(dt3);
+
+                //Cannot set from background, run on main thread
+                //Set names
+                txt_n1.setText(activity1_name);
+                txt_n2.setText(activity2_name);
+                txt_n3.setText(activity3_name);
+
+                //Set Dates
+                txt_d1.setText(activity1_date_new);
+                txt_d2.setText(activity2_date_new);
+                txt_d3.setText(activity3_date_new);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error in post execution.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void recyclerView_Popular() {
+
+        // Creates a horizontal LinearLayoutManager to enable to move between tasks
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_taskList = findViewById(R.id.recyclerView);
+        recyclerView_taskList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<Task> task = new ArrayList<>();
+        task.add(new Task("Task 1", "work_process_img"));
+        task.add(new Task("Task 2", "work_process_img"));
+        task.add(new Task("Task 3", "work_process_img"));
+        task.add(new Task("Task 4", "work_process_img"));
+
+        adapter2 = new TasksAdapter(task);
+        recyclerView_taskList.setAdapter(adapter2);
+    }
+=======
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
 }

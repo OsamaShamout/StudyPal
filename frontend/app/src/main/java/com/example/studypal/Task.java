@@ -26,11 +26,56 @@ public class Task  {
         this.progress = 0;
     }
 
+<<<<<<< HEAD
+    public Task(String name, String type, String section, String img, int progress, int study_hours, String status, ArrayList<Material> materials) {
+        this.name = name;
+        this.type = type;
+        this.section = section;
+        this.img = img;
+        this.progress = progress;
+        this.study_hours = study_hours;
+        this.status = status;
+        this.materials = materials;
+    }
+
+=======
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     public Task(String name, String img) {
         this.name = name;
         this.img = img;
     }
 
+<<<<<<< HEAD
+    public String getImg() {
+        return img;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public int getStudy_hours() {
+        return study_hours;
+    }
+
+    public ArrayList<Material> getMaterials() {
+        return materials;
+    }
+
+=======
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     public void viewTask() {
         System.out.println("Task name: " + this.name);
         System.out.println("Task type: " + this.type);
