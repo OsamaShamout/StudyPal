@@ -16,7 +16,7 @@ Students can efficiently create and manage a repository of notes. These notes ar
 The VLA tool is a holistic solution designed to enhance the learning experience, foster academic success, and facilitate effective communication between students and instructors.
 
 ## View Screenshots
-![ScreenShot](https://github.com/OsamaShamout/MyPal/blob/main/screenshots/Homepage.png)
-![ScreenShot](https://github.com/OsamaShamout/MyPal/blob/main/screenshots/Login.png)
-![ScreenShot](https://github.com/OsamaShamout/MyPal/blob/main/screenshots/CreateTask.png)
+![ScreenShot](https://github.com/OsamaShamout/StudyPal/blob/main/Screenshots/Homepage.png)
+![ScreenShot](https://github.com/OsamaShamout/StudyPal/blob/main/Screenshots/Login.png)
+![ScreenShot](https://github.com/OsamaShamout/StudyPal/blob/main/Screenshots/CreateTask.png)
 
