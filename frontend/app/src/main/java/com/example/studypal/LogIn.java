@@ -121,7 +121,7 @@ public class LogIn extends AppCompatActivity implements ValidateInformation {
 
         //If check e-mail and toast if invalid
         boolean result = validateEmail(email_string);
-        Log.e("Result", String.valueOf(result))
+        Log.e("Result", String.valueOf(result));
         if (!result){
             Toast.makeText(getApplicationContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             dialogue.setText("Please enter a valid email address.");
