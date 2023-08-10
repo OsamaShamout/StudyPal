@@ -14,6 +14,20 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+
+public class HomepageStudent extends AppCompatActivity {
+<<<<<<< HEAD
+
+    private RecyclerView.Adapter adapter2;
+    private RecyclerView recyclerView_taskList;
+
+=======
+    private RecyclerView.Adapter adapter2;
+    private RecyclerView recyclerView_taskList;
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
+=======
 
 
 public class HomepageStudent extends AppCompatActivity {
@@ -46,10 +60,15 @@ public class HomepageStudent extends AppCompatActivity {
         this.task = task;
     }
 
+>>>>>>> a9cb39947c394d82d0ec9007f72b45d7ec44d8c5
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hompeage_student);
+<<<<<<< HEAD
+
+        recyclerView_Popular();
+=======
         recyclerView_Popular();
 
         mAuth = FirebaseAuth.getInstance();
@@ -98,5 +117,25 @@ public class HomepageStudent extends AppCompatActivity {
 
         adapter2 = new TasksAdapter(task);
         recyclerView_taskList.setAdapter(adapter2);
+>>>>>>> c42b3703457acf1a776de5f77afd684793c7a6fe
     }
+
+    private void recyclerView_Popular() {
+
+        // Creates a horizontal LinearLayoutManager to enable to move between tasks
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_taskList = findViewById(R.id.recyclerView);
+        recyclerView_taskList.setLayoutManager(linearLayoutManager);
+
+        ArrayList<Task> task = new ArrayList<>();
+        task.add(new Task("Task 1", "work_process_img"));
+        task.add(new Task("Task 2", "work_process_img"));
+        task.add(new Task("Task 3", "work_process_img"));
+        task.add(new Task("Task 4", "work_process_img"));
+
+        adapter2 = new TasksAdapter(task);
+        recyclerView_taskList.setAdapter(adapter2);
+    }
+
+
 }

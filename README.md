@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LAU VLA
 
 ## Features
@@ -20,4 +21,6 @@ The VLA tool is a holistic solution designed to enhance the learning experience,
 ![ScreenShot](https://github.com/OsamaShamout/MyPal/blob/main/screenshots/Login.png)
 ![ScreenShot](https://github.com/OsamaShamout/MyPal/blob/main/screenshots/CreateTask.png)
 
+=======
+>>>>>>> f13369f8807fb4046b1399edb8c3ba0625d953c2
 
